@@ -68,7 +68,7 @@ public struct Line: View {
                     .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
                     .transition(.opacity)
             }
-            if shouldAnimate!{
+            if shouldAnimate{
                 self.closedPath
                     .animation(.easeIn(duration: 1.6))
             }
@@ -84,7 +84,7 @@ public struct Line: View {
                 .onDisappear {
                     self.showFull = false }
             
-            if shouldAnimate!{
+            if shouldAnimate{
                 self.path
                     .animation(Animation.easeOut(duration: 1.2).delay(Double(self.index)*0.4))
             }
