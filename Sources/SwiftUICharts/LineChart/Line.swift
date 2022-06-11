@@ -17,7 +17,7 @@ public struct Line: View {
     @Binding var maxDataValue: Double?
     @State private var showFull: Bool = false
     @State var showBackground: Bool = true
-    @State var shouldAnimate: Bool?
+    @State var shouldAnimate: Bool = false
     var gradient: GradientColor = GradientColor(start: Colors.GradientPurple, end: Colors.GradientNeonBlue)
     var index:Int = 0
     let padding:CGFloat = 30
