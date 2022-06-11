@@ -17,6 +17,7 @@ public struct Line: View {
     @Binding var maxDataValue: Double?
     @State private var showFull: Bool = false
     @State var showBackground: Bool = true
+    @State var shouldAnimate: Bool?
     var gradient: GradientColor = GradientColor(start: Colors.GradientPurple, end: Colors.GradientNeonBlue)
     var index:Int = 0
     let padding:CGFloat = 30
@@ -66,19 +67,26 @@ public struct Line: View {
                     .rotationEffect(.degrees(180), anchor: .center)
                     .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
                     .transition(.opacity)
+            }
+            if shouldAnimate!{
+                self.closedPath
                     .animation(.easeIn(duration: 1.6))
             }
+            
             self.path
                 .trim(from: 0, to: self.showFull ? 1:0)
                 .stroke(LinearGradient(gradient: gradient.getGradient(), startPoint: .leading, endPoint: .trailing) ,style: StrokeStyle(lineWidth: 3, lineJoin: .round))
                 .rotationEffect(.degrees(180), anchor: .center)
                 .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
-                .animation(Animation.easeOut(duration: 1.2).delay(Double(self.index)*0.4))
                 .onAppear {
                     self.showFull = true
-            }
-            .onDisappear {
-                self.showFull = false
+                }
+                .onDisappear {
+                    self.showFull = false }
+            
+            if shouldAnimate!{
+                self.path
+                    .animation(Animation.easeOut(duration: 1.2).delay(Double(self.index)*0.4))
             }
             if(self.showIndicator) {
                 IndicatorPoint()

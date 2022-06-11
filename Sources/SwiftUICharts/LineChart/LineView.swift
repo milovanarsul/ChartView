@@ -16,6 +16,7 @@ public struct LineView: View {
     public var style: ChartStyle
     public var darkModeStyle: ChartStyle
     public var valueSpecifier: String
+    public var shouldAnimate: Bool
     public var legendSpecifier: String
     
     @Environment(\.colorScheme) var colorScheme: ColorScheme
@@ -34,7 +35,8 @@ public struct LineView: View {
                 legend: String? = nil,
                 style: ChartStyle = Styles.lineChartStyleOne,
                 valueSpecifier: String? = "%.1f",
-                legendSpecifier: String? = "%.2f") {
+                legendSpecifier: String? = "%.2f",
+                shouldAnimate: Bool){
         
         self.data = ChartData(points: data)
         self.xAxisData = xAxisData
@@ -43,6 +45,7 @@ public struct LineView: View {
         self.style = style
         self.valueSpecifier = valueSpecifier!
         self.legendSpecifier = legendSpecifier!
+        self.shouldAnimate = shouldAnimate
         self.darkModeStyle = style.darkModeStyle != nil ? style.darkModeStyle! : Styles.lineViewDarkMode
     }
     
@@ -85,6 +88,7 @@ public struct LineView: View {
                              minDataValue: .constant(nil),
                              maxDataValue: .constant(nil),
                              showBackground: false,
+                             shouldAnimate: self.shouldAnimate,
                              gradient: self.style.gradientColor
                         )
 
@@ -144,9 +148,9 @@ public struct LineView: View {
 struct LineView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            LineView(data: [8,23,54,32,12,37,7,23,43], title: "Full chart", style: Styles.lineChartStyleOne)
+            LineView(data: [8,23,54,32,12,37,7,23,43], title: "Full chart", style: Styles.lineChartStyleOne, shouldAnimate: false)
             
-            LineView(data: [282.502, 284.495, 283.51, 285.019, 285.197, 286.118, 288.737, 288.455, 289.391, 287.691, 285.878, 286.46, 286.252, 284.652, 284.129, 284.188], title: "Full chart", style: Styles.lineChartStyleOne)
+            LineView(data: [282.502, 284.495, 283.51, 285.019, 285.197, 286.118, 288.737, 288.455, 289.391, 287.691, 285.878, 286.46, 286.252, 284.652, 284.129, 284.188], title: "Full chart", style: Styles.lineChartStyleOne, shouldAnimate: false)
             
         }
     }
