@@ -54,7 +54,6 @@ public struct LineView: View {
             RoundedRectangle(cornerRadius: 20)
                 .fill(Color.white)
                 .frame(width: 360, height: 450, alignment: .center)
-                .shadow(color: .gray, radius: 8)
             
             VStack(alignment: .leading, spacing: 8) {
                 Group{
